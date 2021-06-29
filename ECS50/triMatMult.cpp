@@ -4,6 +4,19 @@
 #include <stdexcept>
 #include <cmath>
 
+int calcNumSpaces(int row){
+  int spaces = row;
+  while (row != 0){
+    row -= 1;
+    spaces += row;
+  }
+  return spaces;
+}
+
+int converttoIndex(int i, int n, int j, int m){
+  return (i * n + j) - m;
+}
+
 int main(int argc, char *argv[]){
   //open the files
   std::ifstream m1{argv[1]};
@@ -36,14 +49,15 @@ int main(int argc, char *argv[]){
 
 //create loop that loops through the rows and columns of matrix
 // loops through rows
+  unsigned jvalue = 0;
   for (unsigned i = 0; i < dim1; ++i){
   //loops through columns
-    for (unsigned j = 0; j < dim2; ++j){
+    for (unsigned j = jvalue; j < dim2; ++j){
         int sum = 0;
         //to account for missing elements
-        unsigned kvalue = j + 1;
+        unsigned kend = j + 1;
   //loops through rows of columns
-        for (unsigned k = 0; k < kvalue; ++k){
+        for (unsigned k = jvalue; k < kend; ++k){
           //calculate num of spaces missing
           int m1 = calcNumSpaces(i);
           int m2 = calcNumSpaces(k);
@@ -51,6 +65,7 @@ int main(int argc, char *argv[]){
         }
         result.push_back(sum);
      }
+    ++jvalue;
   }
 
   for (unsigned i = 0; i < result.size(); ++i){
