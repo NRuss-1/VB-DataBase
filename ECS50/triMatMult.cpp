@@ -34,37 +34,25 @@ int main(int argc, char *argv[]){
     matrix2.push_back(buf);
   }
 
-  //matrix multiplication and write to file
-//    arrstart = i * n + i - m;
+//create loop that loops through the rows and columns of matrix
+// loops through rows
+  for (unsigned i = 0; i < dim1; ++i){
+  //loops through columns
+    for (unsigned j = 0; j < dim2; ++j){
+        int sum = 0;
+        //to account for missing elements
+        unsigned kvalue = j + 1;
+  //loops through rows of columns
+        for (unsigned k = 0; k < kvalue; ++k){
+          //calculate num of spaces missing
+          int m1 = calcNumSpaces(i);
+          int m2 = calcNumSpaces(k);
+          sum += matrix1.at(converttoIndex(i, dim1, k, m1)) * matrix2.at(converttoIndex(k, dim2, j, m2));
+        }
+        result.push_back(sum);
+     }
+  }
 
-  //for each row
-  int n = dim1;
-  int rowcount = 0;
-  unsigned rowstart = 0;
-  unsigned colstart = 0;
-  unsigned arrstart;
-  int m = 0;
-  while (rowcount != dim1){
-    //for all columns
-    int sum;
-
-    for (unsigned i = colstart; i < n; ++i){
-
-
-
-    }
-
-
-
-
-
-
-
-  ++rowcount;
-  ++rowstart;
-  ++colstart;
-  m = m + rowcount;
-}
   for (unsigned i = 0; i < result.size(); ++i){
     std::cout << result[i] << ' ';
   }
