@@ -49,13 +49,13 @@ int main(int argc, char *argv[]){
 
 //create loop that loops through the rows and columns of matrix
 // loops through rows
-  unsigned jvalue = 0;
+  unsigned jvalue = 0; //move column value up since triangular
   for (unsigned i = 0; i < dim1; ++i){
   //loops through columns
     for (unsigned j = jvalue; j < dim2; ++j){
         int sum = 0;
         //to account for missing elements
-        unsigned kend = j + 1;
+        unsigned kend = j + 1; // end = how many elements in each column
   //loops through rows of columns
         for (unsigned k = jvalue; k < kend; ++k){
           //calculate num of spaces missing
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]){
         }
         result.push_back(sum);
      }
-    ++jvalue;
+    ++jvalue; //increase to account for triangular matrix
   }
 
   for (unsigned i = 0; i < result.size(); ++i){
