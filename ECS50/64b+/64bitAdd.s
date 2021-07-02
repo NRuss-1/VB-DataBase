@@ -14,10 +14,9 @@ num2:
 _start:
   #upper 32 bits in EDX
   #lower 32 bits in EAX
-  #EBX holds sum
   movl num1, %edx
   movl num1+4, %eax
-  addl, num2+4, %eax
+  addl num2+4, %eax
   jc carry
   addl num2, %edx
   addl num2, %edx
