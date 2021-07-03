@@ -1,5 +1,4 @@
 .global _start
-.equ var, 5
 
 .data
 num1:
@@ -12,20 +11,25 @@ num2:
 
 .text
 _start:
-    #upper 32 bits in EDX
-    #lower 32 bits in EAX
 
     movl num1, %edx
+
+    #add lower bits
     movl num1+4, %eax
     addl num2+4, %eax
 
+    #if there's a carry go to carry section
     jc carry
+
+    #add upper bits
     addl num2, %edx
     jmp done
 
+    #if carry, add upper bits and the carry
 carry:
     addl num2, %edx
     addl $1, %edx
 
 done:
-    movl %eax, %eax
+    #random garbage
+    movl %ecx, %ecx
