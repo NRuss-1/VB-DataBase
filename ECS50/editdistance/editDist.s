@@ -59,7 +59,7 @@ strlen:
 		incl %esi
 		jmp for_start
 	for_end:
-	ret
+ret
 
 
 editdist:
