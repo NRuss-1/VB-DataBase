@@ -149,7 +149,7 @@ editDist:
   }
   */
   movl $0, %ecx #ecx = i                                            #negation: i >= (word2_len + 1)
-  start_for:														#i - (word2_len + 1) >= 0
+  start_for:									#i - (word2_len + 1) >= 0
     movl s2_len, %esi
     incl %esi
     cmpl %esi, %ecx #i - (word2_len + 1)
@@ -164,7 +164,6 @@ editDist:
 
 #second for loops
   movl $1, %ecx #ecx = i
-  movl $1, %ebx #ebx = j
   #1st loop
   for_loop1:                         #negation: i >= (word1_len + 1)
     movl s1_len, %edi			     #i - (word1_len + 1) >= 0
@@ -173,6 +172,7 @@ editDist:
     jge end_for1
 		movl %ecx, curDist
     #second loop
+    movl $1, %ebx #ebx = j
     for_loop2:
       #negation: j >= (word2_len + 1)
       #j - (word2_len + 1) >= 0
@@ -180,17 +180,17 @@ editDist:
     	incl %esi
       cmpl %esi, %ebx #j - (word2_len + 1)x
       jge end_for2
-      movb string1-1*1(,%ecx), %ah								#string1[i-1]= *(string1 + i -1)
+      movb string1-1*1(,%ecx), %ah						#string1[i-1]= *(string1 + i -1)
       movb string2-1*1(,%ebx), %al
-																#string2[j-1] = *(string2+j-1)
+										#string2[j-1] = *(string2+j-1)
       if1:
       	cmpb %ah, %al
         jnz else
 
       #curDist[j] = oldDist[j - 1];
 
-      	movl oldDist - 1*4(, %ecx, 4), %eax                          #open: edx, eax, esi, edi
-        movl %eax, curDist(,%ecx)                    #closed: ecx, ebx
+      	movl oldDist-1*4(, %ebx, 4), %eax                          #open: edx, eax, esi, edi
+        movl %eax, curDist(,%ebx,4)                    #closed: ecx, ebx
         jmp end_else
 
       else:
