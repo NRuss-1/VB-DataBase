@@ -137,7 +137,7 @@ multi_for_start1:
       jmp end_else1
 
     else1:
-      curDist[j] = min(min(oldDist[j], curDist[j-1]), oldDist[j-1]) + 1;
+      #curDist[j] = min(min(oldDist[j], curDist[j-1]), oldDist[j-1]) + 1;
       movl (%edx, %ebx, 4), %eax
       movl -1 * 4(%edi, %ebx), %esi
       call min
