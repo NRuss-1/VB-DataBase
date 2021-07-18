@@ -1,5 +1,3 @@
-int row_count = 0;
-
 void calculate(int** combs, int* items, int* curRow, int start, int end,
     int index, int k)
 {
@@ -31,9 +29,7 @@ int** get_combs(int* items, int k, int len) {
             combs[i][j] = 0;
         }
     }
-    int* curRow = (int*)malloc(sizeof(int) * k);
-    int row_count = 0;
+    int curRow[k];
     calculate(combs, items, curRow, 0, len - 1, 0, k);
-    free(curRow);
     return combs;
 }
